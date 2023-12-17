@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="border-radius: 30px;" class="container-fluid shadow py-5 mt-5 table-responsive" data-wow-delay="0.1s">
+  <h2>Testlar ro'yxati</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Test Nomi</th>
+        <th scope="col">Test Natijalari</th>
+        <th scope="col">Holat</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for quiz in quizs %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ quiz.title }}</td>
+          <td><a target="_blank" href="{% url 'result_detail' quiz.id %}">Test natijalari</a></td>
+          {% if quiz.tugatish %}
+            <td>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-outline-danger shadow" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ forloop.counter }}">
+                To'xtatilgan
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="staticBackdrop{{ forloop.counter }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div style='background: linear-gradient(to right, #16222A, #3A6073); ' class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">Mumkin emas</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Kechirasiz ushbu test admin to'monidan to'xtatilgan! <br>
+                      <div class="spinner-grow text-danger" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          {% else %}
+            <td><a href="{% url 'quistion' quiz.id %}" class="btn btn-success">Qatnashish</a></td>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}

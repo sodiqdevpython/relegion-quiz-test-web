@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+{% block body %}
+
+<div style='background: linear-gradient(to right, #16222A, #3A6073); ' class="container-fluid mt-5 pb-5 mb-5 rounded-1">
+    <div id="timer" class="text-end"></div>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="timer_value" id="timer_value" value="0">
+        {% for q in quistions %}
+            <h6><span style='color: green'>{{ forloop.counter }}-savol</span> <br><br>{{ q.name }}</h6>
+            {% if q.image_question %}
+                <img class="rounded img-fluid" src="{{ q.image_question.url }}" alt=""><br>
+            {% endif %}
+                {% for answer in answers %}
+                    {% if q.id == answer.question.id %}
+                        <label><input style="margin-bottom: 10px;" type="radio" name="{{ q.name }}" value="{{ answer.is_right }}" value="False" required >    {{ answer.name }}</label>
+                        <br>
+                    {% endif %}
+                {% endfor %}
+                <hr>
+        {% endfor %}
+        <button class="btn btn-outline-success shadow" type="submit">Natijani ko'rish</button>
+    </form>
+</div>
+
+<script>
+    var timerValue = 0;
+
+    var x = setInterval(function() {
+        document.getElementById("timer").innerHTML = "Vaqt: " + timerValue + " sekund";
+        document.getElementById("timer_value").value = timerValue; 
+        timerValue++;
+    }, 1000);
+</script>
+
+{% endblock %}
+{% endblock content %}

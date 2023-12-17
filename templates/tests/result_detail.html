@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="table-responsive">
+<div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">O'rin</th>
+                <th scope="col">Rasm</th>
+                <th scope="col">Ism Familiya</th>
+                <th scope="col">To'g'ri javoblar</th>
+                <th scope="col">Ball</th>
+                <th scope="col">Vaqt</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results_base %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><img style="width: 60px; height: 60px;" class='rounded-circle' src={{ result.user.socialaccount_set.all.0.get_avatar_url }} ></td>
+                <td>{{ result.user.first_name.title }} {{ result.user.last_name.title }}</td>
+                <td>{{ result.corrent_question }}</td>
+                <td>{{ result.total }}</td>
+                <td scope="row">{{ result.create_at|date:'Y-m-d H:i' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</div>
+
+
+</div>
+{% endblock content %}

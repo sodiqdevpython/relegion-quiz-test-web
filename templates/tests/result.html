@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="container mt-5 pt-3">
+    {% block body %}
+        <div class="container py-5 mt-5">
+          <style>
+            .alert-danger {
+                background: linear-gradient(to right, #141E30, #243B55); 
+            }
+        </style>
+        <div style='color: whitesmoke' class="alert alert-danger shadow" role="alert">
+            <h4>Sizning test natijangiz !</h4>
+            <p>Holatingiz: {{ status }}</p>
+            <p>Testlar soni: {{ total_question }}</p>
+            <p>To'g'ri javoblar soni: {{ correct }}</p>
+            <p>Noto'g'ri javoblar soni: {{ wrong }}</p>
+            <p>Siz yig'gan balingiz: {{ total }}% </p>
+            <hr>
+            <span style='color: red'>Diqqat testni faqat 1-marta ishlaganingiz natijalar jadvaliga yoziladi !</span>
+            <hr>
+            <a href="{% url 'result_detail' pk %}" class='btn btn-success rounded-pill'>Qolganlarning natijalarini ko'rish</a>
+            
+        </div>
+        </div>
+        </div>
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+                <div class="col-sm-12 col-xl-6">
+                    <div class="bg-secondary rounded h-100 p-4">
+                        <h6 class="mb-4">Natija jadvali</h6>
+                        <canvas id="pie-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            var ctx = document.getElementById("pie-chart").getContext("2d");
+            var myChart = new Chart(ctx, {
+                type: "pie",
+                data: {
+                    labels: ["Tog'ri", "Xato", "Tavakkal bo'lishi mumkin"],
+                    datasets: [{
+                        backgroundColor: [
+                            "RGB(76 225 143)",
+                            "rgba(235, 22, 22, .6)",
+                            "RGB(60 176 190)"
+                        ],
+                        data: [{{ correct }}, {{ wrong }}, {{tavakkal}}]
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        </script>
+
+    {% endblock %}
+</div>
+{% endblock content %}
