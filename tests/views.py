@@ -3,14 +3,13 @@ from random import shuffle
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render
+from .models import Question, Answer, Result, QuizModel
 
 def home(request):
     if request.user.is_authenticated:
         return render(request, 'index.html')
     else:
         return redirect('login')
-    
-from .models import Question, Answer, Result, QuizModel
 
 def qiuz(request):
     quizs = QuizModel.objects.all()
@@ -18,7 +17,6 @@ def qiuz(request):
         'quizs': quizs
     }
     return render(request, 'tests/quiz.html', context)
-
 
 @login_required(login_url='login')
 def quistion(request, pk):
