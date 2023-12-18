@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from random import shuffle
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render
-from .models import Question, Answer, Result, QuizModel
+from .models import Question, Answer, Result, QuizModel, Theme
 
 def home(request):
     if request.user.is_authenticated:
@@ -93,3 +93,11 @@ def result_list(request, pk):
         'results_base': results_base
     }
     return render(request, 'tests/result_detail.html', context)
+
+
+def themes(request, slug):
+    all_theme = get_object_or_404(Theme, slug=slug)
+    context = {
+        'all_theme': all_theme
+    }
+    return render(request, 'theme_list.html', context)

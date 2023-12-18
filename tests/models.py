@@ -1,8 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-
-
 class QuizModel(models.Model):
     title = models.CharField(max_length=50, verbose_name='Mavzu nomi')
     tugatish = models.BooleanField(default=False)

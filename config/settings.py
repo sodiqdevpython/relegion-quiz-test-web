@@ -87,6 +87,8 @@ TEMPLATES = [
     },
 ]
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = 9999999999999
+
 WSGI_APPLICATION = 'config.wsgi.application'
 
 

@@ -39,6 +39,7 @@ class AdminViewProfile(admin.ModelAdmin):
 
 @admin.register(Theme)
 class AdminViewTheme(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ('title',)}
     class Meta:
         list_display = ['title']
         search_fields = ['title']

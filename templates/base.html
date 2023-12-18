@@ -50,7 +50,11 @@
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
+                        {% if request.user.socialaccount_set.all.0.get_avatar_url %}
                         <img class="rounded-circle" src="{{ request.user.socialaccount_set.all.0.get_avatar_url }}" alt="" style="width: 40px; height: 40px;">
+                        {% else %}
+                        <img class="rounded-circle" src="{% static 'img/profile.png' %}" alt="" style="width: 40px; height: 40px;">
+                        {% endif %}
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
@@ -99,7 +103,11 @@
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
+                                    {% if request.user.socialaccount_set.all.0.get_avatar_url %}
                                     <img class="rounded-circle" src="{{ request.user.socialaccount_set.all.0.get_avatar_url }}" alt="" style="width: 40px; height: 40px;">
+                                    {% else %}
+                                    <img class="rounded-circle" src="{% static 'img/profile.png' %}" alt="" style="width: 40px; height: 40px;">
+                                    {% endif %}
                                     <div class="ms-2">
                                         <h6 class="fw-normal mb-0">Yangi foydalanuvchi ro'yxatdan o'tdi</h6>
                                         <small>1 minut oldin</small>
@@ -136,7 +144,11 @@
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            {% if request.user.socialaccount_set.all.0.get_avatar_url %}
                             <img class="rounded-circle me-lg-2" src="{{ request.user.socialaccount_set.all.0.get_avatar_url }}" alt="" style="width: 40px; height: 40px;">
+                            {% else %}
+                            <img class="rounded-circle me-lg-2" src="{% static 'img/profile.png' %}" alt="" style="width: 40px; height: 40px;">
+                            {% endif %}
                             <span class="d-none d-lg-inline-flex">{{ user.first_name }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
