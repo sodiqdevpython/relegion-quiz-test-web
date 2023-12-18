@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home, quistion, qiuz, result_list, themes
+from .views import home, quistion, qiuz, result_list, themes_detail, theme_list, statistika
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -9,5 +9,7 @@ urlpatterns = [
     path('quiz/<int:pk>/', quistion, name='quistion'),
     path('results/<int:pk>/', result_list, name='result_detail'),
     path('test/mavzuli/', qiuz, name='thematic'),
-    path('mavzu/<slug:slug>/', themes, name='theme')
+    path('mavzu/<slug:slug>/', themes_detail, name='theme'), 
+    path('mavzular/', theme_list, name='themes'),
+    path('statistika/', statistika, name='statistika')
 ]

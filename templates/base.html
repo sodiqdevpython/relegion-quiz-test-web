@@ -63,17 +63,16 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="index.html" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Statistika</a>
+                    <a href="{% url 'statistika' %}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Statistika</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Testlar</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="button.html" class="dropdown-item">Guruxli testlar</a>
                             <a href="{% url 'thematic' %}" class="dropdown-item">Mavzu bo'yicha testlar</a>
-                            <a href="element.html" class="dropdown-item">Sessiyaga tushadigan testlar</a>
+                            <a href="#" class="dropdown-item">Sessiya testlari <sub style='color:red; background: linear-gradient(to right, #373B44, #4286f4); border-radius: 10%;'> Tez kunda</sub></a>
                         </div>
                     </div>
-                    <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Mavzular</a>
-                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Kitoblar</a>
+                    <a href="{% url 'themes' %}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Mavzular</a>
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Top reyting</a>
                 </div>
             </nav>
@@ -119,7 +118,7 @@
                                 <div class="d-flex align-items-center">
                                     <img class="rounded-circle" src="{% static 'img/profile.png' %}" alt="" style="width: 40px; height: 40px;">
                                     <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Foydalanuvchi <span style='color: red'>sodiq0813</span> parolini o'zgartirdi</h6>
+                                        <h6 class="fw-normal mb-0">Foydalanuvchi <span style='color: red'>sodiq</span> parolini o'zgartirdi</h6>
                                         <small>37 minut oldin</small>
                                     </div>
                                 </div>
@@ -139,7 +138,7 @@
                                 <small>1 minut oldin</small>
                             </a>
                             <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all notifications</a>
+                            <a href="#" class="dropdown-item text-center">Hamma xabarlarni ko'rish</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">

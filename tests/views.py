@@ -7,10 +7,14 @@ from .models import Question, Answer, Result, QuizModel, Theme
 
 def home(request):
     if request.user.is_authenticated:
-        return render(request, 'index.html')
+        if request.user.is_staff:
+            return redirect('statistika')
+        else:
+            return render(request, 'index.html')
     else:
         return redirect('login')
 
+@login_required(login_url='login')
 def qiuz(request):
     quizs = QuizModel.objects.all()
     context = {
@@ -86,7 +90,7 @@ def quistion(request, pk):
     }
 
     return render(request, 'tests/quistion.html', context)
-
+@login_required(login_url='login')
 def result_list(request, pk):
     results_base = Result.objects.filter(quiz_id = pk).order_by('-corrent_question')
     context = {
@@ -94,10 +98,22 @@ def result_list(request, pk):
     }
     return render(request, 'tests/result_detail.html', context)
 
-
-def themes(request, slug):
-    all_theme = get_object_or_404(Theme, slug=slug)
+@login_required(login_url='login')
+def themes_detail(request, slug):
+    data = get_object_or_404(Theme, slug=slug)
     context = {
-        'all_theme': all_theme
+        'data': data
+    }
+    return render(request, 'theme_detail.html', context)
+
+@login_required(login_url='login')
+def theme_list(request):
+    data = Theme.objects.all()
+    context = {
+        'data': data
     }
     return render(request, 'theme_list.html', context)
+
+@login_required(login_url='login')
+def statistika(request):
+    return render(request, 'blank.html')

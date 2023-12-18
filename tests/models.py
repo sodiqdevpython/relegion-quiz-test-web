@@ -70,6 +70,8 @@ class GroupUNI(models.Model): # Group university
     def __str__(self):
         return self.name
 
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) # !user ni o'zi
     overall_score = models.PositiveIntegerField(default=0) #! Jami to'plagan bali userni 
