@@ -5,14 +5,9 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 from .models import Question, Answer, Result, QuizModel, Theme
 
+@login_required(login_url='login')
 def home(request):
-    if request.user.is_authenticated:
-        if request.user.is_staff:
-            return redirect('statistika')
-        else:
-            return render(request, 'index.html')
-    else:
-        return redirect('login')
+    return render(request, 'index.html')
 
 @login_required(login_url='login')
 def qiuz(request):
@@ -116,4 +111,8 @@ def theme_list(request):
 
 @login_required(login_url='login')
 def statistika(request):
-    return render(request, 'blank.html')
+    return render(request, 'statistika.html')
+
+@login_required(login_url='login')
+def group_test(request):
+    return render(request, 'group_test.html')

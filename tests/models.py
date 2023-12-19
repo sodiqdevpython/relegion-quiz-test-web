@@ -77,7 +77,7 @@ class Profile(models.Model):
     overall_score = models.PositiveIntegerField(default=0) #! Jami to'plagan bali userni 
     which_group = models.ForeignKey(GroupUNI, blank=True, null=True, on_delete=models.CASCADE) #! Qaysi guruxdanligi
     image = models.ImageField(upload_to='media/', blank=True, null=True) #! Profil rasmi
-    average_test_solve_time = models.PositiveIntegerField(null=True, blank=True) #! O'rtacha test ishlash vaqti user ni
+    # average_test_solve_time = models.PositiveIntegerField(null=True, blank=True) #! O'rtacha test ishlash vaqti user ni
 
     def __str__(self):
         return self.user

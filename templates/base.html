@@ -67,13 +67,13 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Testlar</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="button.html" class="dropdown-item">Guruxli testlar</a>
+                            <a href="{% url 'group_test' %}" class="dropdown-item">Guruxli testlar<sub style='color:red; background: linear-gradient(to right, #373B44, #4286f4); border-radius: 10%;'> Tez kunda</sub></a>
                             <a href="{% url 'thematic' %}" class="dropdown-item">Mavzu bo'yicha testlar</a>
-                            <a href="#" class="dropdown-item">Sessiya testlari <sub style='color:red; background: linear-gradient(to right, #373B44, #4286f4); border-radius: 10%;'> Tez kunda</sub></a>
+                            <a href="{% url 'group_test' %}" class="dropdown-item">Sessiya testlari <sub style='color:red; background: linear-gradient(to right, #373B44, #4286f4); border-radius: 10%;'> Tez kunda</sub></a>
                         </div>
                     </div>
                     <a href="{% url 'themes' %}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Mavzular</a>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Top reyting</a>
+                    <a href="{% url 'group_test' %}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Reyting <sub style='color:red; background: linear-gradient(to right, #373B44, #4286f4); border-radius: 10%;'> Tez kunda</sub></a>
                 </div>
             </nav>
         </div>

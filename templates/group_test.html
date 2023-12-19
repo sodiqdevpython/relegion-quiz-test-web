@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+    {% block content %}
+        <div class="container-fluid pt-4 px-4">
+            <div class="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">
+                <div class="col-md-6 text-center">
+                    <h4 style='margin-top: 20px;'>Ushbu bo'lim hozircha tayyor emas <span style='color: red'>{{ user.first_name }} {{ user.last_name }}</span> </h4>
+                    <p>Vaqtim bo'lsa keyingi semestrda tugatib qo'yaman 😉</p>
+                </div>
+            </div>
+        </div>
+    {% endblock content %}

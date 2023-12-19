@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+    {% block content %}
+        {% if user.is_staff %}
+        
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-6">
+                <div class="col-sm-12 col-xl-6">
+                    <div class="bg-secondary text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0">Serverga tushayotgan og'irlik</h6>
+                            <a href="">Xozirgi holat</a>
+                        </div>
+                        <canvas id="worldwide-sales"></canvas>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-6">
+                    <div class="bg-secondary text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0">Talabalar natijalari</h6>
+                            <a href="">Ko'proq...</a>
+                        </div>
+                        <canvas id="salse-revenue"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-secondary rounded mt-3 h-50 p-4">
+            <iframe class="position-relative rounded w-100 h-100" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3382.4909046644125!2d69.26912537361372!3d41.37484520803445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2s!4v1702993464800!5m2!1sen!2s" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0" style="filter: grayscale(100%) invert(92%) contrast(83%); border: 0;"></iframe>
+        </div>
+        
+
+
+        
+        
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+                <div class="col-sm-12 col-md-6 col-xl-4">
+                    
+                </div>
+                <div class="col-sm-12 col-md-6 col-xl-4">
+                    <div class="h-100 bg-secondary rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0">Kalendar</h6>
+                            <a href="">Rejalar</a>
+                        </div>
+                        <div id="calender"></div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-xl-4">
+                    <div class="h-100 bg-secondary rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0">Kerak bo'lgan ishlar</h6>
+                            <a href="">Hammasi</a>
+                        </div>
+                        <div class="d-flex mb-2">
+                            <input class="form-control bg-dark border-0" type="text" placeholder="Topshiriq qo'shish">
+                            <button type="button" class="btn btn-primary ms-2">Qo'shish</button>
+                        </div>
+                        <div class="d-flex align-items-center border-bottom py-2">
+                            <input class="form-check-input m-0" type="checkbox">
+                            <div class="w-100 ms-3">
+                                <div class="d-flex w-100 align-items-center justify-content-between">
+                                    <span>Taqdim etish</span>
+                                    <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center border-bottom py-2">
+                            <input class="form-check-input m-0" type="checkbox">
+                            <div class="w-100 ms-3">
+                                <div class="d-flex w-100 align-items-center justify-content-between">
+                                    <span>Test tuzish</span>
+                                    <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center pt-2">
+                            <input class="form-check-input m-0" type="checkbox">
+                            <div class="w-100 ms-3">
+                                <div class="d-flex w-100 align-items-center justify-content-between">
+                                    <span>Deploy qilish</span>
+                                    <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="container-fluid pt-4 px-4">
+            <div class="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">
+                <div class="col-md-6 text-center">
+                    <img class="rounded-circle" src="{{ request.user.socialaccount_set.all.0.get_avatar_url }}" alt="" style="width: 80px; height: 80px;">
+                    <h4 style='margin-top: 20px;'>Salom <span style='color: red'>{{ user.first_name }} {{ user.last_name }}</span> </h4>
+                    <p>Ushbu web ning statistikasini ko'rish hozircha sizda vaqtinchalik yopilgan ! <br><span style='color: red'>Sabab: </span>Oddiy foydalanuvchilarga hozircha statistikani ko'rish vaqtinchalik yopilgan</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    {% endblock content %}

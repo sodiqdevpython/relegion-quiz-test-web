@@ -6,7 +6,7 @@
 {% block body %}
 
 <div style='background: linear-gradient(to right, #16222A, #3A6073);' class="container-fluid mt-5 pb-5 mb-5 rounded-1">
-    <div id="timer" class="text-end"></div>
+    <div style='color: red' id="timer" class="text-end"></div>
     <form method="post">
         {% csrf_token %}
         <input type="hidden" name="timer_value" id="timer_value" value="0">
@@ -23,6 +23,7 @@
                 {% endfor %}
                 <hr>
         {% endfor %}
+        
         <button class="btn btn-outline-success shadow" type="submit">Natijani ko'rish</button>
     </form>
 </div>
