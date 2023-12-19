@@ -31,7 +31,7 @@ __pycache__
 
 # Gradle
 .idea/**/gradle.xml
-.idea/**/libraries
+
 
 # File-based project format
 *.iws
@@ -53,8 +53,7 @@ dist/
 downloads/ 
 eggs/ 
 .eggs/ 
-lib/ 
-lib64/ 
+ 
 parts/ 
 sdist/ 
 var/ 
