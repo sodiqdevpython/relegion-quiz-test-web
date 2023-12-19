@@ -141,7 +141,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 # STATICFILES_DIRS = [BASE_DIR / 'static'] for offline
-STATIC_ROOT = BASE_DIR / 'static'  #! online for online
+STATIC_ROOT = BASE_DIR / 'static'  #! for online
 
 MEDIA_URL = 'images/'
 MEDIA_ROOT = BASE_DIR / 'images'
