@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="profile-card card shadow-sm text-center" style="background: linear-gradient(to right, #16222A, #3A6073);">
+  <img src="{{ data.socialaccount_set.all.0.get_avatar_url }}" alt="" class="avatar rounded-circle mx-auto mb-4" style="border: 2px solid #ddd; box-shadow: 0 0 5px rgba(0,0,0,0.25);">
+  <h3 class="card-title text-primary h4">{{ data.first_name }} {{ data.last_name }}</h3>
+  <ul class="list-unstyled mb-4">
+    <li><i class="fa fa-user text-secondary"></i> Ism: {{ data.first_name }}</li>
+    <li><i class="fa fa-user text-secondary"></i> Familiya: {{ data.last_name }}</li>
+    <li><i class="fa fa-envelope text-secondary"></i> Email: {{ data.email }}</li>
+    <li><i class="fa fa-calendar text-secondary"></i> Ro'yxatdan o'tgan sana: {{ data.date_joined }}</li>
+    <li><i class="fa fa-clock-o text-secondary"></i> Oxirgi marta login qilgan: {{ data.last_login }}</li>
+  </ul>
+</div>
+{% endblock content %}

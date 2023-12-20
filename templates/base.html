@@ -58,7 +58,7 @@
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">{{ user.first_name }} {{ user.last_name }}</h6>
+                        <h6 class="mb-0">{{ request.user.first_name }} {{ request.user.last_name }}</h6>
                         <span>Online</span>
                     </div>
                 </div>
@@ -148,10 +148,10 @@
                             {% else %}
                             <img class="rounded-circle me-lg-2" src="{% static 'img/profile.png' %}" alt="" style="width: 40px; height: 40px;">
                             {% endif %}
-                            <span class="d-none d-lg-inline-flex">{{ user.first_name }}</span>
+                            <span class="d-none d-lg-inline-flex">{{ request.user.first_name }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">Profil</a>
+                            <a href="{% url 'profile' request.user.email %}" class="dropdown-item">Profil</a>
                             <form action="{% url 'logout' %}" method="post">
                                 {% csrf_token %}
                                 <button type="submit" class="dropdown-item">Chiqish</button>

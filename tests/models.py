@@ -78,13 +78,21 @@ class Profile(models.Model):
     which_group = models.ForeignKey(GroupUNI, blank=True, null=True, on_delete=models.CASCADE) #! Qaysi guruxdanligi
     image = models.ImageField(upload_to='media/', blank=True, null=True) #! Profil rasmi
     # average_test_solve_time = models.PositiveIntegerField(null=True, blank=True) #! O'rtacha test ishlash vaqti user ni
-
+    
     def __str__(self):
-        return self.user
+        return self.user.username
 
     class Meta:
         verbose_name = 'Profil'
         verbose_name_plural = 'Profillar'
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
 
 class Theme(models.Model):
     title = models.CharField(max_length=200)

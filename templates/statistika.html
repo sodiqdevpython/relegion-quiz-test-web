@@ -25,6 +25,38 @@
                 </div>
             </div>
         </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary text-center rounded p-4">
+                <h6 class="mb-4">Group Overall Scores</h6>
+                <canvas id="group-overall-scores"></canvas>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var ctx = document.getElementById('group-overall-scores').getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [{% for group in group_data %}"{{ group.name }}",{% endfor %}],
+                        datasets: [{
+                            label: 'Overall Scores',
+                            data: [{% for group in group_data %}{{ group.overall_score }},{% endfor %}],
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
         <div class="bg-secondary rounded mt-3 h-50 p-4">
             <iframe class="position-relative rounded w-100 h-100" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3382.4909046644125!2d69.26912537361372!3d41.37484520803445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2s!4v1702993464800!5m2!1sen!2s" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0" style="filter: grayscale(100%) invert(92%) contrast(83%); border: 0;"></iframe>
         </div>

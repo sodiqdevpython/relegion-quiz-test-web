@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home, quistion, qiuz, result_list, themes_detail, theme_list, statistika, group_test
+from .views import home, quistion, qiuz, result_list, themes_detail, theme_list, statistika, group_test, profile
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -12,5 +12,6 @@ urlpatterns = [
     path('mavzu/<slug:slug>/', themes_detail, name='theme'), 
     path('mavzular/', theme_list, name='themes'),
     path('statistika/', statistika, name='statistika'),
-    path('guruxli_test/', group_test, name='group_test')
+    path('guruxli_test/', group_test, name='group_test'),
+    path('profile/<str:email>/', profile, name='profile')
 ]

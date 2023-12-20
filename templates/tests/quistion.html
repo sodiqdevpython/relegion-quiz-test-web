@@ -10,6 +10,17 @@
     <form method="post">
         {% csrf_token %}
         <input type="hidden" name="timer_value" id="timer_value" value="0">
+        <label for="group">Guruxingizni belgilang:</label>
+        <select name="group" id="group" required>
+            <option value="" disabled selected>Hech qaysi</option>
+            {% for group in groups %}
+                <option value="{{ group.id }}">{{ group.name }}</option>
+            {% endfor %}
+        </select>
+        {% if request.user.profile.which_group %}
+            <p>Group: {{ request.user.profile.which_group.name }}</p>
+            <p>Overall Ball: {{ request.user.profile.which_group.overall_ball }}</p>
+        {% endif %}
         {% for q in quistions %}
             <h6><span style='color: green'>{{ forloop.counter }}-savol</span> <br><br>{{ q.name }}</h6>
             {% if q.image_question %}

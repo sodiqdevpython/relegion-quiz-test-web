@@ -3,7 +3,8 @@ from random import shuffle
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render
-from .models import Question, Answer, Result, QuizModel, Theme
+from .models import Question, Answer, Result, QuizModel, Theme, GroupUNI, Profile
+
 
 @login_required(login_url='login')
 def home(request):
@@ -20,12 +21,14 @@ def qiuz(request):
 @login_required(login_url='login')
 def quistion(request, pk):
     quistions = Question.objects.filter(quiz_id = pk)
-    
+    groups = GroupUNI.objects.all()
     # quistions = (list(quistions))
     answers = Answer.objects.all()
     answers = list(answers)
     shuffle(answers)
     if request.method == "POST":
+        group_id = request.POST.get('group')
+        selected_group = get_object_or_404(GroupUNI, id=group_id)
         correct = 0
         wrong = 0
         for q in quistions:
@@ -38,6 +41,12 @@ def quistion(request, pk):
             pass
         else:
             timer_value = int(request.POST.get('timer_value', 0))
+
+            try:
+                profile = request.user.profile
+            except Profile.DoesNotExist:
+                profile = Profile.objects.create(user=request.user)
+    
             Result.objects.create(
                 user=User.objects.get(username=request.user.username),
                 total_question=len(quistions),
@@ -45,6 +54,14 @@ def quistion(request, pk):
                 quiz = quiz,
                 spend_time=timer_value
             )
+            selected_group.overall_ball += correct  # Assuming you want to update based on correct answers
+            selected_group.save()
+
+            profile = request.user.profile
+            profile.overall_score += correct  # Assuming 'correct' is the variable containing the number of correct answers
+            profile.which_group = selected_group
+            profile.save()
+
         total_ball = round(correct * 100 / len(quistions), 2)
         if total_ball==100:
             tavakkal = 0
@@ -80,6 +97,7 @@ def quistion(request, pk):
         }
         return render(request, 'tests/result.html', context)
     context = {
+        'groups': groups,
         'quistions': quistions,
         'answers': answers,
     }
@@ -111,8 +129,22 @@ def theme_list(request):
 
 @login_required(login_url='login')
 def statistika(request):
-    return render(request, 'statistika.html')
+    groups = GroupUNI.objects.all()
+    group_data = [{'name': group.name, 'overall_score': group.overall_ball} for group in groups]
+
+    context = {
+        'group_data': group_data,
+    }
+    return render(request, 'statistika.html', context)
 
 @login_required(login_url='login')
 def group_test(request):
     return render(request, 'group_test.html')
+
+@login_required(login_url='login')
+def profile(request, email):
+    data = get_object_or_404(User, email=email)
+    context = {
+        'data': data
+    }
+    return render(request, 'profile.html', context)
