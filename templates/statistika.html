@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
     {% block content %}
         {% if user.is_staff %}
         
@@ -25,25 +25,74 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-xl-6">
-            <div class="bg-secondary text-center rounded p-4">
-                <h6 class="mb-4">Group Overall Scores</h6>
-                <canvas id="group-overall-scores"></canvas>
+        <div class='container'>
+            <div class='row'>
+                <div class="col-sm-12 col-xl-6">
+                    <div class="bg-secondary text-center rounded p-4">
+                        <h6 class="mb-4">3 ta gurux natijalari</h6>
+                        <canvas id="group-overall-scores"></canvas>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-6">
+                    <div class="bg-secondary text-center rounded p-4">
+                        <h6 class="mb-4">3 ta gurux natijalari</h6>
+                        <canvas id="overall-scores-distribution"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="container-fluid pt-4 px-4">
+            {% for group in group_data2 %}
+                <div class="row g-4">
+                    <div class="col-sm-12 col-xl-12">
+                        <div class="bg-secondary text-center rounded p-4">
+                            <h6 class="mb-4">Top 5 Yuqori ball <span style='color:'>{{ group.group.name }}</span> guruxidan</h6>
+                            <ul class="list-unstyled top-users-list">
+                                {% for user_data in group.users %}
+                                    <li class="d-flex align-items-center mb-3">
+                                        <img src="{% static 'img/profile.png' %}" alt="{{ user_data.user__first_name }}" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-0">{{ user_data.user__first_name }} {{ user_data.user__last_name }}</h6>
+                                            <p class="text-muted mb-0">To'g'ri javoblar: {{ user_data.total_correct }}</p>
+                                        </div>
+                                    </li>
+                                    <hr>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                var ctx = document.getElementById('group-overall-scores').getContext('2d');
-                var chart = new Chart(ctx, {
+                // Bar Chart
+                var ctxBar = document.getElementById('group-overall-scores').getContext('2d');
+                var chartBar = new Chart(ctxBar, {
                     type: 'bar',
                     data: {
                         labels: [{% for group in group_data %}"{{ group.name }}",{% endfor %}],
                         datasets: [{
-                            label: 'Overall Scores',
+                            label: 'Umumiy ',
                             data: [{% for group in group_data %}{{ group.overall_score }},{% endfor %}],
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(255, 205, 86, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(255, 205, 86, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
                             borderWidth: 1
                         }]
                     },
@@ -53,6 +102,35 @@
                                 beginAtZero: true
                             }
                         }
+                    }
+                });
+
+                // Pie Chart
+                var ctxPie = document.getElementById('overall-scores-distribution').getContext('2d');
+                var chartPie = new Chart(ctxPie, {
+                    type: 'pie',
+                    data: {
+                        labels: [{% for group in group_data %}"{{ group.name }}",{% endfor %}],
+                        datasets: [{
+                            data: [{% for group in group_data %}{{ group.overall_score }},{% endfor %}],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(255, 205, 86, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(255, 205, 86, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
                     }
                 });
             });

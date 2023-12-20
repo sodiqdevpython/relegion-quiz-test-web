@@ -127,13 +127,31 @@ def theme_list(request):
     }
     return render(request, 'theme_list.html', context)
 
+from django.db.models import Count
 @login_required(login_url='login')
 def statistika(request):
     groups = GroupUNI.objects.all()
     group_data = [{'name': group.name, 'overall_score': group.overall_ball} for group in groups]
+    group_data2 = []
+
+    for group in groups:
+            users_in_group = group.group_students.all()
+            
+            # Get the top 5 users with the most correct answers in the group
+            group_result = Result.objects.filter(
+                user__in=users_in_group,
+                quiz__in=QuizModel.objects.all()
+            ).values(
+                'user__id', 'user__username', 'user__first_name', 'user__last_name'
+            ).annotate(
+                total_correct=Count('id')
+            ).order_by('-total_correct')[:5]
+
+            group_data2.append({'group': group, 'users': group_result})
 
     context = {
         'group_data': group_data,
+        'group_data2': group_data2
     }
     return render(request, 'statistika.html', context)
 
