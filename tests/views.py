@@ -54,11 +54,11 @@ def quistion(request, pk):
                 quiz = quiz,
                 spend_time=timer_value
             )
-            selected_group.overall_ball += correct  # Assuming you want to update based on correct answers
+            selected_group.overall_ball += correct  
             selected_group.save()
 
             profile = request.user.profile
-            profile.overall_score += correct  # Assuming 'correct' is the variable containing the number of correct answers
+            profile.overall_score += correct 
             profile.which_group = selected_group
             profile.save()
 
@@ -137,7 +137,7 @@ def statistika(request):
     for group in groups:
             users_in_group = group.group_students.all()
             
-            # Get the top 5 users with the most correct answers in the group
+
             group_result = Result.objects.filter(
                 user__in=users_in_group,
                 quiz__in=QuizModel.objects.all()
